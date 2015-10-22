@@ -23,6 +23,7 @@
     "commander": "^2.9.0",
     "dateformat": "*",
     "formidable": "*",
+    "querystring": "^0.2.0",
     "unzip": "*"
   }
 }

@@ -8,6 +8,7 @@ var Stream = require('stream');
 var config = require('./config');
 var formidable = require('formidable');
 var dateFormat = require('dateformat');
+var querystring = require('querystring');
 
 var program = require('commander');
  
@@ -25,13 +26,15 @@ console.info('Server will run at:', port);
 console.info('Files will unzip at:', output);
 
 server.createServer(function(request, response) {
+    var req_url = url.parse(request.url);
     var host = request.headers.host;
-    var pathname = url.parse(request.url).pathname;
+    var pathname = req_url.pathname;
+    var param = querystring.parse(req_url.query);
 
-    console.log(dateFormat(new Date(), "yyyy-mm-dd hh:MM:ss"), host, pathname);
+    console.log(dateFormat(new Date(), "yyyy-mm-dd hh:MM:ss"), host, pathname, param.src);
 
-    var response_end = function(data) {
-        response.writeHead(data === '404' ? 404 : 200, {
+    var response_end = function(data, status_code) {
+        response.writeHead(status_code || (data === '404' ? 404 : 200), {
             'Content-Type': 'text/plain'
         });
         return response.end(data);
@@ -42,7 +45,7 @@ server.createServer(function(request, response) {
         var form = new formidable.IncomingForm();
         form.encoding = 'binary';
         form.parse(request, function(err, fields) {
-            if (err) return response_end('error');
+            if (err) return response_end('error', 403);
 
             if (fields && fields.zip) {
 
@@ -59,12 +62,18 @@ server.createServer(function(request, response) {
             }
         });
     } else {
-        var realPath = output + host.replace(/^(map\.)?/i, '/') + pathname;
-        fs.exists(realPath, function(exists) {
+        var real_path = '';
+        if (pathname === '/load' && param.src) {
+            real_path = output + param.src.replace(/^(https?:)?(\/\/)?/i, '/');
+        } else {
+            real_path = output + host.replace(/^(map\.)?/i, '/') + pathname;
+        }
+        console.info('Real path:', real_path);
+        fs.exists(real_path, function(exists) {
             if (!exists) {
                 return response_end('404');
             }
-            fs.readFile(realPath, function(err, file) {
+            fs.readFile(real_path, function(err, file) {
                 if (err) {
                     return response_end('404');
                 } else {
