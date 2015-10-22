@@ -9,6 +9,6 @@
 	}
 ```
 
-> tips：功能上来说，支持简单文件备份（会生存一个 zip 包通过 http post 到服务器），并不局限于 sourcemap 文件
+> tips：功能上来说，支持简单文件备份，并不局限于 sourcemap 文件
 
 相关链接：https://github.com/BetterJS/badjs-sourcemap
