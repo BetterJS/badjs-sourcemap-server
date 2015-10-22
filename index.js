@@ -11,7 +11,6 @@ var dateFormat = require('dateformat');
 var port = config.port;
 var output = config.output;
 
-
 server.createServer(function(request, response) {
     var host = request.headers.host;
     var pathname = url.parse(request.url).pathname;
@@ -26,7 +25,7 @@ server.createServer(function(request, response) {
     };
     
     // upload
-    if (pathname === '/sourcemap') {
+    if (pathname === '/upload') {
         var form = new formidable.IncomingForm();
         form.encoding = 'binary';
         form.parse(request, function(err, fields) {
@@ -47,7 +46,7 @@ server.createServer(function(request, response) {
             }
         });
     } else {
-        var realPath = output + host.replace(/^map\./i, '/') + pathname;
+        var realPath = output + host.replace(/^(map\.)?/i, '/') + pathname;
         fs.exists(realPath, function(exists) {
             if (!exists) {
                 return response_end('404');
@@ -61,8 +60,6 @@ server.createServer(function(request, response) {
             });
         });
     }
-
-
 }).listen(port);
 
 console.log('Server is listening port ' + port + '...');
