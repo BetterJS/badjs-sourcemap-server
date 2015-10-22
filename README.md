@@ -5,7 +5,7 @@
 ```json
 	{
 		"port": 80, // 监听的端口
-		"output": "./maps" // 接收的文件解压（unzip）的路径
+		"output": "./maps" // 接收的文件解压（unzip）的路径, 需要保证有写权限
 	}
 ```
 

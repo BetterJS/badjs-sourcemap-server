@@ -1,6 +1,6 @@
 {
   "name": "badjs-sourcemap-server",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "./index.js",
   "bin": {
     "bserver": "index.js"
@@ -20,8 +20,9 @@
     "sourcemap"
   ],
   "dependencies": {
-    "unzip": "*",
+    "commander": "^2.9.0",
+    "dateformat": "*",
     "formidable": "*",
-    "dateformat": "*"
+    "unzip": "*"
   }
 }

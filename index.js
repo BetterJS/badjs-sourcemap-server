@@ -9,8 +9,20 @@ var config = require('./config');
 var formidable = require('formidable');
 var dateFormat = require('dateformat');
 
-var port = process.args[2] || config.port;
-var output = process.args[3] || config.output;
+var program = require('commander');
+ 
+program
+  .version('0.0.4')
+  .usage('[options] <value ...>')
+  .option('-o, --output [./maps]', 'unzip output folder')
+  .option('-p, --port <80>', 'server listen port', parseInt)
+  .parse(process.argv);
+ 
+var port = program.port || config.port;
+var output = program.output || config.output;
+
+console.info('Server will run at:', port);
+console.info('Files will unzip at:', output);
 
 server.createServer(function(request, response) {
     var host = request.headers.host;
@@ -63,4 +75,4 @@ server.createServer(function(request, response) {
     }
 }).listen(port);
 
-console.log('Server is listening port ' + port + '...');
+console.info('Server is listening port ' + port + '...');
