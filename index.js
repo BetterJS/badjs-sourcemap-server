@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 /* global __dirname, Buffer */
 var fs = require('fs');
 var url = require('url');
@@ -8,8 +9,8 @@ var config = require('./config');
 var formidable = require('formidable');
 var dateFormat = require('dateformat');
 
-var port = config.port;
-var output = config.output;
+var port = process.args[2] || config.port;
+var output = process.args[3] || config.output;
 
 server.createServer(function(request, response) {
     var host = request.headers.host;
@@ -23,7 +24,7 @@ server.createServer(function(request, response) {
         });
         return response.end(data);
     };
-    
+
     // upload
     if (pathname === '/upload') {
         var form = new formidable.IncomingForm();
