@@ -1,4 +1,4 @@
 {
-	"port": 8086,
+	"port": 80,
 	"output": "./maps"
 }
