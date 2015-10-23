@@ -11,14 +11,14 @@ var dateFormat = require('dateformat');
 var querystring = require('querystring');
 
 var program = require('commander');
- 
+
 program
-  .version('0.1.5')
-  .usage('[options] <value ...>')
-  .option('-o, --output [./maps]', 'unzip output folder')
-  .option('-p, --port <80>', 'server listen port', parseInt)
-  .parse(process.argv);
- 
+    .version('0.1.5')
+    .usage('[options] <value ...>')
+    .option('-o, --output [./maps]', 'unzip output folder')
+    .option('-p, --port <80>', 'server listen port', parseInt)
+    .parse(process.argv);
+
 var port = program.port || config.port;
 var output = program.output || config.output;
 
