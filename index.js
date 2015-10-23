@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 /* global __dirname, Buffer */
 var fs = require('fs');
 var url = require('url');
@@ -12,7 +13,7 @@ var querystring = require('querystring');
 var program = require('commander');
  
 program
-  .version('0.1.3')
+  .version('0.1.4')
   .usage('[options] <value ...>')
   .option('-o, --output [./maps]', 'unzip output folder')
   .option('-p, --port <80>', 'server listen port', parseInt)
