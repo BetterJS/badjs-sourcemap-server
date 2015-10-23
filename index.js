@@ -12,7 +12,7 @@ var querystring = require('querystring');
 var program = require('commander');
  
 program
-  .version('0.1.2')
+  .version('0.1.3')
   .usage('[options] <value ...>')
   .option('-o, --output [./maps]', 'unzip output folder')
   .option('-p, --port <80>', 'server listen port', parseInt)

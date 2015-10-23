@@ -1,10 +1,10 @@
 {
   "name": "badjs-sourcemap-server",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "main": "./index.js",
   "preferGlobal": true,
   "bin": {
-    "bserver": "./index"
+    "bserver": "./index.js"
   },
   "engines": {
     "node": "*"
