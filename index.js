@@ -44,6 +44,7 @@ server.createServer(function(request, response) {
     if (pathname === '/upload') {
         var form = new formidable.IncomingForm();
         form.encoding = 'binary';
+        form.maxFieldsSize = 1024 * 1024 * 1024; // 1024MB
         form.parse(request, function(err, fields) {
             if (err) return response_end('error', 403);
 
