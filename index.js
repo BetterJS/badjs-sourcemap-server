@@ -28,7 +28,7 @@ console.info('Files will unzip at:', output);
 
 server.createServer(function(request, response) {
     var req_url = url.parse(request.url);
-    var host = request.headers.host;
+    var host = (request.headers.host || '').replace(/:\d+/g, '');
     var pathname = req_url.pathname;
     var param = querystring.parse(req_url.query);
 
