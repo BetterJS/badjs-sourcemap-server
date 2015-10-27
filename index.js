@@ -58,6 +58,7 @@ server.createServer(function(request, response) {
                 data.write(fields.zip, 0, 'binary');
                 var zip_data = new Stream.PassThrough();
                 zip_data.end(new Buffer(data));
+                console.log('upload data: ', data.length);
                 zip_data.pipe(unzip.Extract({
                     path: output
                 }));
