@@ -61,9 +61,9 @@ server.createServer(function(request, response) {
                 zip_data.pipe(unzip.Extract({
                     path: output
                 }));
-                return response_end('data success');
+                return response_end('update data success: ' + data.length);
             } else {
-                return response_end('data error');
+                return response_end('update data error');
             }
         });
     } else {
