@@ -73,7 +73,7 @@ server.createServer(function(request, response) {
         } else {
             real_path = output + host.replace(/^(map\.)?/i, '/') + pathname;
         }
-        
+
         console.info('Real path:', real_path);
 
         fs.exists(real_path, function(exists) {
